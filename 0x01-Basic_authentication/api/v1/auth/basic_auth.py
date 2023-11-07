@@ -5,7 +5,7 @@
 
 from flask import *
 from functools import wraps
-
+from .auth import Auth
 
 class BasicAuth(Auth):
     """implement basic auth
