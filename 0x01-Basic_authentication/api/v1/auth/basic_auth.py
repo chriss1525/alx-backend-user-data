@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""Implement basic auth
 """
-Definition of class BasicAuth
-"""
-import base64
+
 from .auth import Auth
 
 
-
 class BasicAuth(Auth):
-    """ Implement Basic Authorization protocol methods
+    """implement basic auth
     """
     pass
