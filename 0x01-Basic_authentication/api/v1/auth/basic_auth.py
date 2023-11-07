@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
-"""Implement basic auth
 """
-
-from flask import *
+Definition of class BasicAuth
+"""
+import base64
 from .auth import Auth
 
 
-class BasicAuth(Auth) -> Auth:
-    """implement basic auth
+
+class BasicAuth(Auth):
+    """ Implement Basic Authorization protocol methods
     """
     pass
