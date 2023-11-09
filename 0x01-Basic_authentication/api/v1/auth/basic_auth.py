@@ -5,6 +5,8 @@
 """
 
 from .auth import Auth
+import base64
+import binascii
 
 
 class BasicAuth(Auth):
@@ -23,15 +25,17 @@ class BasicAuth(Auth):
             return None
         return authorization_header[6:]
 
-    def decode_base64_authorization_header(self, base64_authorization_header: str) -> str:
-        """decode base64 authorization header
+    def decode_base64_authorization_header(self,
+                                           base64_authorization_header: str) -> str:
+        """Decode a Base64-encoded string
         """
-        if base64_authorization_header == None:
-            return None
-        if not isinstance(base64_authorization_header, str):
-            return None
-        try:
-            return base64_authorization_header.decode('utf-8')
-        except Exception:
+        if base64_authorization_header is None or not isinstance(
+                base64_authorization_header, str):
             return None
 
+        try:
+            decoded = base64.b64decode(
+                base64_authorization_header, validate=True)
+            return decoded.decode('utf-8')
+        except (binascii.Error, UnicodeDecodeError):
+            return None
