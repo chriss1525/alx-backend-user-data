@@ -13,10 +13,12 @@ class Auth(object):
         """require authentication"""
         if path is None or excluded_paths is None or excluded_paths == []:
             return True
-        if path[-1] != '/':
-            path += '/'
-        if path in excluded_paths:
-            return False
+
+        # Check if the path matches any excluded path with a wildcard at the end
+        for excluded_path in excluded_paths:
+            if excluded_path.endswith('*') and path.startswith(excluded_path[:-1]):
+                return False
+
         return True
 
     def authorization_header(self, request=None) -> str:
