@@ -41,10 +41,17 @@ class DB:
         return user
 
     def find_user_by(self, **kwargs) -> User:
-        """Returns the first row found in the users table as filtered by the
-        method’s input arguments
+        """ finds user by kwargs
         """
-        if not kwargs:
+        fields = ["id", "email", "hashed_password",
+                  "session_id", "reset_token"]
+
+        if not kwargs or any(
+            arg not in fields for arg in kwargs
+        ):
             raise InvalidRequestError
-        user = self._session.query(User).filter_by(**kwargs).first()
-        return user
+        session = self._session
+        try:
+            return session.query(User).filter_by(**kwargs).first()
+        except Exception:
+            raise NoResultFound
