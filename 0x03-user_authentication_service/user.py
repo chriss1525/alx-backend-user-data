@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-""" user madel for a database
+""" user model for a database
 """
 
 from sqlalchemy import Column, Integer, String, ForeignKey
@@ -11,11 +11,9 @@ Base = declarative_base()
 
 
 class User(Base):
-    """ User class for a database 
+    """ user model for a database
     """
-
-    __tablename__ = 'users'
-
+    __tablename__ = "users"
     id = Column(Integer, primary_key=True)
     email = Column(String(250), nullable=False)
     hashed_password = Column(String(250), nullable=False)
